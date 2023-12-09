@@ -1,0 +1,52 @@
+version: '3.8'
+services:
+  rmqnamesrv:
+    image: rocketmqinc/rocketmq
+    container_name: rmqnamesrv
+    ports:
+      - 9876:9876
+    volumes:
+      - D:\SoftWare\docker\rocketMQ\logs:/root/logs
+      - D:\SoftWare\docker\rocketMQ\store:/root/store
+    command: ./mqnamesrv
+    networks:
+       default:
+        ipv4_address: 172.10.0.14
+
+  rmqbroker:
+    image: rocketmqinc/rocketmq
+    container_name: rmqbroker
+    ports:
+      - 10909:10909
+      - 10911:10911
+    volumes:
+      - D:\SoftWare\docker\rocketMQ\logs:/root/logs
+      - D:\SoftWare\docker\rocketMQ\store:/root/store
+      - D:\SoftWare\docker\rocketMQ\conf\broker.conf:/opt/rocketmq-4.4.0/conf/broker.conf
+    environment:
+        NAMESRV_ADDR: "172.10.0.14:9876"
+        JAVA_OPT_EXT: "-server -Xms128m -Xmx128m -Xmn128m"
+    command: ./mqbroker -c ../conf/broker.conf
+    depends_on:
+      - rmqnamesrv
+    networks:
+      default:
+        ipv4_address: 172.10.0.15
+    
+  rmqconsole:
+    image: styletang/rocketmq-console-ng
+    container_name: rmqconsole
+    ports:
+      - 9999:8080
+    environment:
+        JAVA_OPTS: "-Drocketmq.namesrv.addr=172.10.0.14:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false"
+    depends_on:
+      - rmqnamesrv
+    networks:
+      default:
+        ipv4_address: 172.10.0.16
+    
+  networks:
+      default:
+        external:
+          name: rmqnet
