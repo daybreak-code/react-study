@@ -23,5 +23,8 @@
 hs_err_pid*
 replay_pid*
 
-react-basic/node_modules
-react-basic02/node_modules
+react-basic-study/node_modules
+react-bill-test/node_modules
+react-redux-pro/node_modules
+react-router-pro/node_modules
+react-meituan/node_modules
