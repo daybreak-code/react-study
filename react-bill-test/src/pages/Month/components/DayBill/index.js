@@ -4,6 +4,7 @@ import { useMemo } from 'react'
 import { billTypeToName } from '@/contants/index'
 import { useState } from 'react'
 import Icon from '@/components/Icon'
+
 const DailyBill = ({ date, billList }) => {
   const dayResult = useMemo(() => {
     // 计算单日统计
@@ -21,7 +22,7 @@ const DailyBill = ({ date, billList }) => {
   // 控制展开收起
   const [visible, setVisible] = useState(false)
   return (
-    <div className={classNames('dailyBill')}>
+    <div className={classNames('dailyBill')} onClick={() => setVisible(!visible)}>
       <div className="header">
         <div className="dateIcon">
           <span className="date">{date}</span>
