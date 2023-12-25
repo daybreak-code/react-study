@@ -11,3 +11,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+:root:root {
+  --adm-color-primary: #a062d4;
+}
+
+.purple-theme {
+  --adm-color-primary: #a062d4;
+}
