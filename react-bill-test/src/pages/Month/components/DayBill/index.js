@@ -1,7 +1,12 @@
 import classNames from 'classnames'
 import './index.scss'
+import { useMemo } from "react"
+import { useSelector } from "react-redux"
+
 
 const DailyBill = () => {
+
+  const billList = useSelector(state => state.bill.billList)
 
   const dayResult = useMemo(() => {
     // 支出  /  收入  / 结余
@@ -24,14 +29,14 @@ const DailyBill = () => {
         <div className="oneLineOverview">
           <div className="pay">
             <span className="type">支出</span>
-            <span className="money">{100}</span>
+            <span className="money">{pay}</span>
           </div>
           <div className="income">
             <span className="type">收入</span>
-            <span className="money">{200}</span>
+            <span className="money">{income}</span>
           </div>
           <div className="balance">
-            <span className="money">{100}</span>
+            <span className="money">{total}</span>
             <span className="type">结余</span>
           </div>
         </div>

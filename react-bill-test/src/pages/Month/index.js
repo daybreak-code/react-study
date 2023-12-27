@@ -6,7 +6,6 @@ import dayjs from "dayjs"
 import { useMemo, useState } from "react"
 import { useEffect } from "react"
 import classNames from "classnames"
-import DailyBill from "./components/DayBill"
 
 const Month = () => {
   // 按月分组
@@ -36,14 +35,6 @@ const Month = () => {
       setMonthList(list)
     }
   }, [monthGroup])
-
-  const dayGroup = useMemo(() => {
-    const group = _.groupBy(currentMonthList, (item) => dayjs(item.date).format('YYYY-MM-DD'))
-    return {
-      dayKeys: Object.keys(group),
-      group
-    }
-  }, [currentMonthList])
 
   // 计算统计
   const overview = useMemo(() => {
@@ -97,11 +88,6 @@ const Month = () => {
             max={new Date()}
             onConfirm={dateConfirm}
           />
-          <div>
-            {dayGroup.dayKeys.map(dayKey => (
-              <DailyBill key={dayKey} date={dayKey} billList={dayGroup.group[dayKey]} />
-            ))}
-          </div>
         </div>
       </div>
     </div >
