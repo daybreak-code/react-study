@@ -50,7 +50,7 @@ const Layout = () => {
         <Outlet />
       </div>
       <div className="footer">
-        <TabBar>
+        <TabBar onChange={swithRoute}>
           {
             tabs.map(item => (
               <TabBar.Item key={item.key} icon={item.icon} title={item.title}></TabBar.Item>
