@@ -22,6 +22,7 @@ const Month = () => {
   })
 
   const dateConfirm = (date) => {
+    console.log(billList)
     setDateVisible(false)
     const monthKey = dayjs(date).format('YYYY-MM')
     setCurrentMonth(monthKey)

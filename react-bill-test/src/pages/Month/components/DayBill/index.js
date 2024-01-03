@@ -9,7 +9,6 @@ const DailyBill = () => {
   const billList = useSelector(state => state.bill.billList)
 
   const dayResult = useMemo(() => {
-    // 支出  /  收入  / 结余
     const pay = billList.filter(item => item.type === 'pay').reduce((a, c) => a + c.money, 0)
     const income = billList.filter(item => item.type === 'income').reduce((a, c) => a + c.money, 0)
     return {
@@ -44,4 +43,5 @@ const DailyBill = () => {
     </div>
   )
 }
+
 export default DailyBill

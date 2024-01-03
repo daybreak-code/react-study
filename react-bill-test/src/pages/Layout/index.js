@@ -31,6 +31,7 @@ const tabs = [
 ]
 
 const Layout = () => {
+
   const navigate = useNavigate()
 
   const swithRoute = (path) => {
@@ -38,16 +39,18 @@ const Layout = () => {
     navigate(path)
   }
   const dispatch = useDispatch()
+
   useEffect(() => {
     dispatch(getBillList())
   }, [dispatch])
+
   return (
     <div className="layout">
       <div className="container">
         <Outlet />
       </div>
       <div className="footer">
-        <TabBar onChange={swithRoute('/month')}>
+        <TabBar>
           {
             tabs.map(item => (
               <TabBar.Item key={item.key} icon={item.icon} title={item.title}></TabBar.Item>

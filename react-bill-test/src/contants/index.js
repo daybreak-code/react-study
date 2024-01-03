@@ -65,11 +65,12 @@ export const billListData = {
   ],
 }
 
-export const billTypeToName = Object.keys(billListData).reduce((prev, key) => {
-  billListData[key].forEach(bill => {
-    bill.list.forEach(item => {
-      prev[item.type] = item.name
+export const billTypeToName = Object.keys(billListData).reduce(
+  (prev, key) => {
+    billListData[key].forEach(bill => {
+      bill.list.forEach(item => {
+        prev[item.type] = item.name
+      })
     })
-  })
-  return prev
+    return prev
 }, {})
