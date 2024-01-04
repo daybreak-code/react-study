@@ -6,15 +6,17 @@ import dayjs from "dayjs"
 import { useMemo, useState } from "react"
 import { useEffect } from "react"
 import classNames from "classnames"
+import DailyBill from "./components/DayBill"
 
 const Month = () => {
-  // 按月分组
   const billList = useSelector(state => state.bill.billList)
+  console.log(billList)
   const monthGroup = useMemo(() => {
     return _.groupBy(billList, item => dayjs(item.date).format('YYYY-MM'))
   }, [billList])
+  console.log(monthGroup)
 
-  // 控制时间选择器打开关闭
+
   const [dateVisible, setDateVisible] = useState(false)
   const [currentMonthList, setMonthList] = useState([])
   const [currentMonth, setCurrentMonth] = useState(() => {
@@ -22,14 +24,21 @@ const Month = () => {
   })
 
   const dateConfirm = (date) => {
-    console.log(billList)
     setDateVisible(false)
     const monthKey = dayjs(date).format('YYYY-MM')
     setCurrentMonth(monthKey)
     setMonthList(monthGroup[monthKey])
   }
 
-  // 首次加载
+  const dayGroup = useMemo(() => {
+    const group = _.groupBy(currentMonthList, (item) => dayjs(item.date).format('YYYY-MM-DD'))
+    console.log(group)
+    return {
+      dayKeys: Object.keys(group),
+      group
+    }
+  }, [currentMonthList])
+
   useEffect(() => {
     const list = monthGroup[dayjs().format('YYYY-MM')]
     if(list){
@@ -37,7 +46,7 @@ const Month = () => {
     }
   }, [monthGroup])
 
-  // 计算统计
+
   const overview = useMemo(() => {
     if (!currentMonthList) return { income: 0, pay: 0, total: 0 }
     const income = currentMonthList.filter(item => item.type === 'income')
@@ -89,7 +98,13 @@ const Month = () => {
             max={new Date()}
             onConfirm={dateConfirm}
           />
+
         </div>
+        <div className="dailyBill">
+            {dayGroup.dayKeys.map(dayKey => (
+               <DailyBill key={dayKey} date={dayKey} billList={dayGroup.group[dayKey]} />
+             ))}
+          </div>
       </div>
     </div >
   )
