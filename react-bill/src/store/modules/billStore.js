@@ -14,7 +14,7 @@ const billStore = createSlice({
   }
 })
 
-const {setBillList} = billStore.actions
+const {setBillList } = billStore.actions
 
 const getBillList = () => {
   return async (dispatch) => {
@@ -25,13 +25,8 @@ const getBillList = () => {
   }
 }
 
-const addBillList = ({bill}) => {
-    const oldBillList = state.billList
-    oldBillList.push(bill)
-    dispatch(setBillList(oldBillList))
-}
 
-export { getBillList, addBillList }
+export { getBillList ,setBillList}
 
 const reducer = billStore.reducer
 

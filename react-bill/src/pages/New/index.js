@@ -5,15 +5,19 @@ import classNames from 'classnames'
 import { billListData } from '@/contants'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
-import {setBillList, addBillList} from '@/store/modules/billStore'
+import { useDispatch, useSelector } from 'react-redux'
+import {setBillList} from '@/store/modules/billStore'
 
 const New = () => {
+
+  const billList = useSelector(state => state.bill.billList); 
+
   const navigate = useNavigate()
 
   const [billType, setBillType] = useState('income')
 
   const [money, setMoney] = useState(0)
+
   const moneyChange = (value) => {
     setMoney(value)
   }
@@ -28,7 +32,12 @@ const New = () => {
       useFor: useFor
     }
     console.log(data)
-    dispatch(addBillList(data))
+    dispatch(addBillIntoList(data))
+  }
+
+  const addBillIntoList = (bill) => {
+    billList.push(bill)
+    setBillList(billList)
   }
 
   return (
@@ -107,7 +116,7 @@ const New = () => {
       </div>
 
       <div className="btns">
-        <Button className="btn save">
+        <Button className="btn save" onClick={saveBill}>
           保 存
         </Button>
       </div>
