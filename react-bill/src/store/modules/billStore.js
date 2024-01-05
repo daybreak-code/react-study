@@ -1,3 +1,4 @@
+import { billListData } from "@/contants";
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
@@ -24,7 +25,13 @@ const getBillList = () => {
   }
 }
 
-export { getBillList }
+const addBillList = ({bill}) => {
+    const oldBillList = state.billList
+    oldBillList.push(bill)
+    dispatch(setBillList(oldBillList))
+}
+
+export { getBillList, addBillList }
 
 const reducer = billStore.reducer
 

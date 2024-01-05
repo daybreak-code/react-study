@@ -5,35 +5,30 @@ import classNames from 'classnames'
 import { billListData } from '@/contants'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
-
-//准备控制支出收入的状态
-//点击按钮切换状态
-//适配按钮样式
-//适配数据显示
+import { useDispatch } from 'react-redux'
+import {setBillList, addBillList} from '@/store/modules/billStore'
 
 const New = () => {
   const navigate = useNavigate()
 
-  //1. 准备一个控制收入支出的状态
-  const [billType, setBillType] = useState('pay')
+  const [billType, setBillType] = useState('income')
 
-  //收集金额
-  const [money, setMoney]  = useState(0)
-
-  const saveBill = () => {
-    // 收集表单数据
-    const date = {
-      type: billType,
-      money: billType === 'pay' ? -money : +money,
-      date: new Date()
-    }
-  }
-
-  const [useFor, setUseFor] = useState('')
-
-
+  const [money, setMoney] = useState(0)
   const moneyChange = (value) => {
     setMoney(value)
+  }
+  const [useFor, setUseFor] = useState('')
+  const dispatch = useDispatch()
+
+  const saveBill = () => {
+    const data = {
+      type: billType,
+      money: billType === 'pay' ? -money : +money,
+      date: new Date(),
+      useFor: useFor
+    }
+    console.log(data)
+    dispatch(addBillList(data))
   }
 
   return (
@@ -47,14 +42,14 @@ const New = () => {
           <Button
             shape="rounded"
             className={classNames(billType === 'pay' ? 'selected' : '')}
-            onClick={()=>setBillType('pay')}
+            onClick={() => setBillType('pay')}
           >
             支出
           </Button>
           <Button
             className={classNames(billType === 'income' ? 'selected' : '')}
+            onClick={() => setBillType('income')}
             shape="rounded"
-            onClick={()=>setBillType('income')}
           >
             收入
           </Button>
@@ -76,8 +71,6 @@ const New = () => {
                 className="input"
                 placeholder="0.00"
                 type="number"
-                value={money}
-                onChange={moneyChange}
               />
               <span className="iconYuan">¥</span>
             </div>
@@ -99,7 +92,6 @@ const New = () => {
                         ''
                       )}
                       key={item.type}
-                      onClick={() => setUseFor(item.type)}
                     >
                       <div className="icon">
                         <Icon type={item.type} />

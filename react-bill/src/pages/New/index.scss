@@ -91,6 +91,7 @@
   }
 
   .container {
+    
   }
   .kaTypeList {
     height: 490px;
@@ -153,17 +154,17 @@
     text-align: center;
 
     .btn {
-      width: 200px;
-      --border-width: 0;
-      --background-color: #fafafa;
-      --text-color: #616161;
-      &:first-child {
-        margin-right: 15px;
-      }
+    width: 200px;
+    --border-width: 0;
+    --background-color: #fafafa;
+    --text-color: #616161;
+    &:first-child {
+    margin-right: 15px;
+    }
     }
     .btn.save {
-      --background-color: var(--ka-bg-color);
-      --text-color: var(--ka-color);
+    --background-color: var(--ka-bg-color);
+    --text-color: var(--ka-color);
+    }
     }
   }
-}
