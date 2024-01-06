@@ -12,7 +12,7 @@ const Login = () => {
                     <Form.Item
                         name="mobile"
                         rules={[
-                            {required: true, message: "请输入手机号"}
+                            {required: true, message: "请输入手机号"},
                             {
                                 pattern: /^1[3-9]\d{9}$/,
                                 message: '手机号码格式不对'

@@ -6,5 +6,5 @@ import { RouterProvider } from 'reactor-router-dom'
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <RouterProvider router={router} />
+    <RouterProvider router={router} />
 )
