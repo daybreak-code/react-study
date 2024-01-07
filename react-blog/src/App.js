@@ -1,8 +1,11 @@
+import React from 'react';  
 
 
 function App() {
   return (
-    <div>this is app</div>
+    <div>
+      this is App
+    </div>
   );
 }
 

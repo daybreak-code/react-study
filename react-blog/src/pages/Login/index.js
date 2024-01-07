@@ -1,83 +1,56 @@
-import React from 'react';
-import { Button, Checkbox, Form, Input } from 'antd';
+import './index.scss'
+import { Card, Form, Input, Button } from 'antd'
 import logo from '@/assets/logo.png'
+import { message } from 'antd'
+import { fetchLogin } from '@/store/modules/user'
+import { useStore } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
-const onFinish = (values) => {
-  console.log('Success:', values);
-};
+const Login = () => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const onFinish = formValue => {
+    dispatch(fetchLogin(formValue))
+    navigate('/')
+    message.success('登录成功')
+  }
 
-const onFinishFailed = (errorInfo) => {
-  console.log('Failed:', errorInfo);
-};
+  return (
+    <div className="login">
+      <Card className="login-container">
+        <img className="login-logo" src={logo} alt="" />
+        {/* 登录表单 */}
+        <Form onFinish={onFinish}>
+          <Form.Item 
+            name="mobile"
+            rules={[
+              { required: true, message: '请输入手机号' },
+              {
+                pattern: /^1[3-9]\d{9}$/,
+                message: '手机号码格式不对'
+              }
+            ]}
+          >
+            <Input size="large" placeholder="请输入手机号" />
+          </Form.Item>
+          <Form.Item
+             name="code"
+             rules={[
+               { required: true, message: '请输入验证码' },
+             ]}
+          >
+            <Input size="large" placeholder="请输入验证码" />
+          </Form.Item>
+          <Form.Item>
+            <Button type="primary" htmlType="submit" size="large" block>
+              登录
+            </Button>
+          </Form.Item>
+        </Form>
+      </Card>
+    </div>
+  )
+}
 
-const Login = () => (
-  
-  <Form
-    name="basic"
-    labelCol={{
-      span: 8,
-    }}
-    wrapperCol={{
-      span: 16,
-    }}
-    style={{
-      maxWidth: 600,
-    }}
-    initialValues={{
-      remember: true,
-    }}
-    onFinish={onFinish}
-    onFinishFailed={onFinishFailed}
-    autoComplete="off"
-  >
-    <Form.Item
-      label="Username"
-      name="username"
-      rules={[
-        {
-          required: true,
-          message: 'Please input your username!',
-        },
-      ]}
-    >
-      <Input />
-    </Form.Item>
-
-    <Form.Item
-      label="Password"
-      name="password"
-      rules={[
-        {
-          required: true,
-          message: 'Please input your password!',
-        },
-      ]}
-    >
-      <Input.Password />
-    </Form.Item>
-
-    <Form.Item
-      name="remember"
-      valuePropName="checked"
-      wrapperCol={{
-        offset: 8,
-        span: 16,
-      }}
-    >
-    <Checkbox>Remember me</Checkbox>
-    </Form.Item>
-
-    <Form.Item
-      wrapperCol={{
-        offset: 8,
-        span: 16,
-      }}
-    >
-      <Button type="primary" htmlType="submit">
-        Submit
-      </Button>
-    </Form.Item>
-  </Form>
-);
-
-export default Login;
+export default Login
