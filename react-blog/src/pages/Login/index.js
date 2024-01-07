@@ -3,7 +3,6 @@ import { Card, Form, Input, Button } from 'antd'
 import logo from '@/assets/logo.png'
 import { message } from 'antd'
 import { fetchLogin } from '@/store/modules/user'
-import { useStore } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
