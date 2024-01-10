@@ -116,7 +116,12 @@ const Article = () => {
     const [count, setCount] = useState(0)
 
     function getArticleListAPI(){
-
+      const res = {
+        data: {
+          results: []
+        }
+      }
+      return res
     }
 
     async function getList (reqData = {}){
@@ -179,7 +184,7 @@ const Article = () => {
           }
           style={{ marginBottom: 20 }}
         >
-          <Form initialValues={{ status: '' }}>
+          <Form initialValues={{ status: '' }} onFinish={onFinish}>
             <Form.Item label="状态" name="status">
               <Radio.Group>
                 <Radio value={''}>全部</Radio>
