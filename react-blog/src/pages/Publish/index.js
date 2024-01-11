@@ -11,7 +11,7 @@ import {
   message
 } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 import './index.scss'
@@ -22,6 +22,22 @@ import { useEffect, useState, useRef } from 'react'
 const { Option } = Select
 
 const Publish = () => {
+
+  const [searchParams] = useSearchParams()
+  const articleId = searchParams.get('id')
+  const [form] = Form.useForm()
+  useEffect(() => {
+    async function getArticle(){
+      const res = await http.get(`/mp/article/${articleId}`)
+      const {cover, ...formValue} = res.data
+      form.setFieldValue({...formValue, type: cover.type})
+      setImageType(cover.type)
+      setImageList(cover.images.map(url => ({url})))
+    }
+    if (articleId){
+      getArticle()
+    }
+  }, [articleId, form])
 
   const [channels, setChannels] = useState([])
 
@@ -36,18 +52,32 @@ const Publish = () => {
   const onFinish = async (formValue) => {
     if (imageType != imageList.length) return message.warning('图片类型和数量不一致')
     const { channel_id, content, title} = formValue
-    const params = {
+    const formatUrl = (list) => {
+      return list.map(item => {
+        if(item.response){
+          return item.response.data.url
+        } else {
+          return item.url
+        }
+      })
+    }
+    const data = {
       channel_id,
       content,
       title,
       type: imageType,
       cover: {
         type: imageType,
-        images: imageList.map(item => item.response.data.url)
+        images: formatUrl(imageList)
       }
     }
-    await http.post('/mp/articles?draft=false', params)
-    message.success('发布文章成功')
+    if (imageType !== imageList.length) return message.warning('图片类型和数量不一致')
+    if (articleId) {
+      await http.put(`/mp/articles/${articleId}?draft=false`, data)
+    } else {
+      await http.post('/mp/articles?draft=false', data)
+    }
+    message.success(`${articleId ? '编辑' : '发布'}文章成功`)
   }
 
   const [imageList, setImageList] = useState([])
@@ -83,7 +113,7 @@ const Publish = () => {
         title={
           <Breadcrumb items={[
             { title: <Link to={'/'}>首页</Link> },
-            { title: '发布文章' },
+            { title: `${articleId ? '编辑文章' : '发布文章'}`},
           ]}
           />
         }
@@ -92,6 +122,7 @@ const Publish = () => {
           labelCol={{ span: 4 }}
           wrapperCol={{ span: 16 }}
           initialValues={{ type: 1 }}
+          form={form}
         >
           <Form.Item
             label="标题"
