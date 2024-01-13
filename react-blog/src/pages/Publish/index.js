@@ -52,6 +52,8 @@ const Publish = () => {
     fetchChannels()
   }, [])
 
+  const [imageType, setImageType] = useState(0)
+
   const onFinish = async (formValue) => {
     const { channel_id, content, title} = formValue
     const formatUrl = (list) => {
@@ -90,7 +92,7 @@ const Publish = () => {
       cacheImageList.current = info.fileList
   }
 
-  const [imageType, setImageType] = useState(0)
+
 
   const onTypeChange = (e) => {
     console.log(e)
@@ -157,40 +159,43 @@ const Publish = () => {
             
           </Form.Item>
           <Form.Item label="封面">
-            <Form.Item name="type" onTypeChange={onTypeChange}>
+            <Form.Item name="type" onChange={onTypeChange}>
               <Radio.Group onRadioChange={onRadioChange}>
                 <Radio value={1}>单图</Radio>
                 <Radio value={3}>三图</Radio>
                 <Radio value={0}>无图</Radio>
               </Radio.Group>
             </Form.Item>
-            {imageType > 0 && 
-                <Upload
-                    name="image"
-                    listType="picture-card"
-                    showUploadList
-                    action={'http://geek.itheima.net/v1_0/upload'}
-                    onChange={onUploadChange}
-                    maxCount={imageType}
-                    multiple={imageType > 1}
-                    fileList={imageList}
-                >
-                  <div style={{ marginTop: 8 }}>
-                    <PlusOutlined />
-                  </div>
-                </Upload>
-              }
+              {imageType > 0 && 
+                  <Upload
+                      name="image"
+                      listType="picture-card"
+                      showUploadList
+                      action={'http://geek.itheima.net/v1_0/upload'}
+                      onChange={onUploadChange}
+                      maxCount={imageType}
+                      multiple={imageType > 1}
+                      fileList={imageList}
+                  >
+                    <div style={{ marginTop: 8 }}>
+                      <PlusOutlined />
+                    </div>
+                  </Upload>
+                }
           </Form.Item>
 
-          <ReactQuill 
-            className='publish-quill' 
-            theme="snow" 
-            placehplder="请输入文章内容" 
-          />
+          <div className='quill-container'>
+            <ReactQuill 
+              className='publish-quill' 
+              theme="snow" 
+              placehplder="请输入文章内容" 
+            />
+          </div>
+          
 
           <Form.Item wrapperCol={{ offset: 4 }}>
             <Space>
-              <Button size="large" type="primary" htmlType="submit" onFinish={onFinish}>
+              <Button size="large" type="primary" htmlType="submit" onClick={onFinish}>
                 发布文章
               </Button>
             </Space>
