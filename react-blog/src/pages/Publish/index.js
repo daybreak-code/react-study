@@ -75,7 +75,9 @@ const Publish = () => {
         images: formatUrl(imageList)
       }
     }
-    if (imageType !== imageList.length) return message.warning('图片类型和数量不一致')
+    console.log(imageType)
+    console.log(imageList.length)
+    if (imageType != imageList.length) return message.warning('图片类型和数量不一致')
     if (articleId) {
       await http.put(`/mp/articles/${articleId}?draft=false`, data)
     } else {
