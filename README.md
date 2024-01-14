@@ -17,7 +17,6 @@ ant created those 2 project for learning:
   - [Installation](#installation)
   - [Usage](#usage)
   - [Contributing](#contributing)
-  - [License](#license)
   - [Contact](#contact)
   - [Acknowledgements](#acknowledgements)
 
@@ -37,10 +36,6 @@ npm run install
 ## Contributing
 
 @Dawn Li
-
-## License
-
-This project is licensed under the [Your License Name] - see the [LICENSE.md](LICENSE.md) file for details.
 
 ## Contact
 
