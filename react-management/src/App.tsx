@@ -1,4 +1,4 @@
-import { useReducer, useState } from 'react'
+// import { useReducer, useState } from 'react'
 // import Comp1 from './components/Comp1'
 // import Comp2 from './components/Comp2'
 // import { Button } from 'antd';
@@ -18,8 +18,8 @@ function App() {
       <Comp2 />
 
       <CaretDownOutlined style={{fontSize: '40px', color: 'red'}} /> */}
-      <Link to="/home">Home</Link> |
-      <Link to="/about">About</Link>
+      {/* <Link to="/home">Home</Link> |
+      <Link to="/about">About</Link> */}
 
       {/* 占位符组件，类似于窗口，用来展示组件 */}
       {/* <Outlet></Outlet> */}
