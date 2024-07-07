@@ -8,6 +8,7 @@ import {
 } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Breadcrumb, Layout, Menu, theme } from 'antd';
+import { Outlet,useNavigate } from 'react-router-dom';
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -28,8 +29,8 @@ function getItem(
 }
 
 const items: MenuItem[] = [
-  getItem('Option 1', '1', <PieChartOutlined />),
-  getItem('Option 2', '2', <DesktopOutlined />),
+  getItem('Option 1', 'page1', <PieChartOutlined />),
+  getItem('Option 2', 'page2', <DesktopOutlined />),
   getItem('User', 'sub1', <UserOutlined />, [
     getItem('Tom', '3'),
     getItem('Bill', '4'),
@@ -45,11 +46,18 @@ const View: React.FC = () => {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
 
+  const navigateTo = useNavigate();
+
+  const menuClick = (e: {key: string}) => {
+    console.log('click menu', e.key);
+    navigateTo(e.key);
+  }
+
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
         <div className="demo-logo-vertical" />
-        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
+        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} onClick={menuClick}/>
       </Sider>
       <Layout>
         <Header style={{ paddingLeft: '16px', background: colorBgContainer }} >
@@ -59,16 +67,7 @@ const View: React.FC = () => {
           </Breadcrumb>
         </Header>
         <Content style={{ margin: '0 16px', backgroundColor: 'blue' }}>
-          {/* <div
-            style={{
-              padding: 24,
-              minHeight: 360,
-              background: colorBgContainer,
-              borderRadius: borderRadiusLG,
-            }}
-          >
-            Bill is a cat.
-          </div> */}
+          <Outlet />
         </Content>
         <Footer style={{ textAlign: 'center', padding: 0, lineHeight: '48px'}}>
           Ant Design ©{new Date().getFullYear()} Created by Ant UED
