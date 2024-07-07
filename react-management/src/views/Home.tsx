@@ -39,7 +39,7 @@ const items: MenuItem[] = [
   getItem('Files', '9', <FileOutlined />),
 ];
 
-const Home: React.FC = () => {
+const View: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer, borderRadiusLG },
@@ -52,13 +52,14 @@ const Home: React.FC = () => {
         <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
       </Sider>
       <Layout>
-        <Header style={{ padding: 0, background: colorBgContainer }} />
-        <Content style={{ margin: '0 16px' }}>
-          <Breadcrumb style={{ margin: '16px 0' }}>
-            <Breadcrumb.Item>User</Breadcrumb.Item>
-            <Breadcrumb.Item>Bill</Breadcrumb.Item>
+        <Header style={{ paddingLeft: '16px', background: colorBgContainer }} >
+          <Breadcrumb style={{lineHeight: '64px' }}>
+              <Breadcrumb.Item>User</Breadcrumb.Item>
+              <Breadcrumb.Item>Bill</Breadcrumb.Item>
           </Breadcrumb>
-          <div
+        </Header>
+        <Content style={{ margin: '0 16px', backgroundColor: 'blue' }}>
+          {/* <div
             style={{
               padding: 24,
               minHeight: 360,
@@ -67,9 +68,9 @@ const Home: React.FC = () => {
             }}
           >
             Bill is a cat.
-          </div>
+          </div> */}
         </Content>
-        <Footer style={{ textAlign: 'center' }}>
+        <Footer style={{ textAlign: 'center', padding: 0, lineHeight: '48px'}}>
           Ant Design ©{new Date().getFullYear()} Created by Ant UED
         </Footer>
       </Layout>
@@ -77,4 +78,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default View;
