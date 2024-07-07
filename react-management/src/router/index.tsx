@@ -6,7 +6,6 @@ const About = lazy(() => import("../views/About"))
 const Home = lazy(() => import("../views/Home"))
 
 //懒加载的模式的组件的写法，外面还要套一层loading的提示组件
-
 const withLoadingComponent = (comp: JSX.Element) => (
     <React.Suspense fallback={<div>loading...</div>}>
         {comp}
