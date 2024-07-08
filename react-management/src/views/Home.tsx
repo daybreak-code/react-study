@@ -53,11 +53,15 @@ const View: React.FC = () => {
     navigateTo(e.key);
   }
 
+  const handleOpenChange = (openkeys: string[]) => {
+    console.log(openkeys)
+  }
+
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
         <div className="demo-logo-vertical" />
-        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} onClick={menuClick}/>
+        <Menu theme="dark" defaultSelectedKeys={['page1']} mode="inline" items={items} onClick={menuClick} onOpenChange={handleOpenChange} />
       </Sider>
       <Layout>
         <Header style={{ paddingLeft: '16px', background: colorBgContainer }} >
