@@ -57,15 +57,15 @@ const items: MenuItem[] = [
         children: [
             {
                 label: 'Tom',
-                key: '/sub1'
+                key: '/page3/page301'
             },
             {
                 label: 'Bill',
-                key: '/sub2'
+                key: '/page3/page302'
             },
             {
                 label: 'Alex',
-                key: '/sub3'
+                key: '/page3/page303'
             }
         ]
     },
