@@ -42,6 +42,7 @@ const items: MenuItem[] = [
 
 const View: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
+  const [menuKeys, setMenuKeys] = useState([''])
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
@@ -54,14 +55,14 @@ const View: React.FC = () => {
   }
 
   const handleOpenChange = (openkeys: string[]) => {
-    console.log(openkeys)
+    setMenuKeys([openkeys[openkeys.length - 1]]);
   }
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
         <div className="demo-logo-vertical" />
-        <Menu theme="dark" defaultSelectedKeys={['page1']} mode="inline" items={items} onClick={menuClick} onOpenChange={handleOpenChange} />
+        <Menu theme="dark" defaultSelectedKeys={['page1']} mode="inline" items={items} openKeys={menuKeys} onClick={menuClick} onOpenChange={handleOpenChange} />
       </Sider>
       <Layout>
         <Header style={{ paddingLeft: '16px', background: colorBgContainer }} >
