@@ -8,7 +8,7 @@ import {
 } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Menu } from 'antd';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 
 type MenuItem = Required<MenuProps>['items'][number];
@@ -96,17 +96,19 @@ const Comp: React.FC = () => {
     const [menuKeys, setMenuKeys] = useState([''])
 
   const navigateTo = useNavigate();
+  const currentRoute = useLocation();
 
   const menuClick = (e: {key: string}) => {
     console.log('click menu', e.key);
     navigateTo(e.key);
+    console.log('useLocation: ',currentRoute)
   }
 
   const handleOpenChange = (openkeys: string[]) => {
     setMenuKeys([openkeys[openkeys.length - 1]]);
   }
     return (
-        <Menu theme="dark" defaultSelectedKeys={['page1']} mode="inline" items={items} openKeys={menuKeys} onClick={menuClick} onOpenChange={handleOpenChange} />
+        <Menu theme="dark" defaultSelectedKeys={[currentRoute.pathname]} mode="inline" items={items} openKeys={menuKeys} onClick={menuClick} onOpenChange={handleOpenChange} />
     )
 }
 
