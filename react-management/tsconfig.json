@@ -5,7 +5,8 @@
       "@/*": [
         "src/*"
       ]
-    }
+    },
+    "suppressImplicitAnyIndexErrors": true
   },
   "files": [],
   "references": [

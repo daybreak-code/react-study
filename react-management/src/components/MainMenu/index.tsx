@@ -93,20 +93,34 @@ const items: MenuItem[] = [
 ]
 
 const Comp: React.FC = () => {
-    const [menuKeys, setMenuKeys] = useState([''])
 
-  const navigateTo = useNavigate();
-  const currentRoute = useLocation();
+    let firstOpenKey:string = "";
+    const navigateTo = useNavigate();
+    const currentRoute = useLocation();
 
-  const menuClick = (e: {key: string}) => {
-    console.log('click menu', e.key);
-    navigateTo(e.key);
-    console.log('useLocation: ',currentRoute)
-  }
+    const menuClick = (e: {key: string}) => {
+        console.log('click menu', e.key);
+        navigateTo(e.key);
+        console.log('useLocation: ',currentRoute)
+    }
 
-  const handleOpenChange = (openkeys: string[]) => {
-    setMenuKeys([openkeys[openkeys.length - 1]]);
-  }
+    const handleOpenChange = (openkeys: string[]) => {
+        setMenuKeys([openkeys[openkeys.length - 1]]);
+    }
+
+    function findKey(obj:{key:string}){
+        return obj.key === currentRoute.pathname;
+    }
+
+    for (let i = 0; i < items.length; i++){
+        if (items[i]!['children'] && items[i]!['children'].length > 1 && items[i]!['children'].find(findKey)){
+            firstOpenKey = items[i]!.key as string;
+            break;    
+        }
+    }
+
+    const [menuKeys, setMenuKeys] = useState([firstOpenKey])
+ 
     return (
         <Menu theme="dark" defaultSelectedKeys={[currentRoute.pathname]} mode="inline" items={items} openKeys={menuKeys} onClick={menuClick} onOpenChange={handleOpenChange} />
     )
