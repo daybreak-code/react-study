@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { ChangeEvent, useEffect, useState } from "react"
 import styles from "./login.module.css"
 import initLoginBtn from './init.ts'
 import { Input, Space, Button } from 'antd';
@@ -12,6 +12,13 @@ const View = () => {
             initLoginBtn();
         }
     }, [])
+
+    //保存 username
+    const [userName, setUserName] = useState('');
+    const changeUserName = (e: ChangeEvent<HTMLInputElement>) => {
+        setUserName(e.target.value)
+        console.log(userName)
+    }
 
     return (
         <div className={styles.loginPage}>
@@ -27,7 +34,7 @@ const View = () => {
                 {/* 表单部分 */}
                 <div className="form">
                     <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
-                        <Input placeholder="Basic usage" />
+                        <Input placeholder="Basic usage" onChange={changeUserName} />
                         <Input.Password placeholder="input password" />
                         <div className="captchaBox">
                             <Input placeholder="Verify code" />
