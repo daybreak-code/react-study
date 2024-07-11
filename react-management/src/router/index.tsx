@@ -1,6 +1,7 @@
 //组件形式写法
 import { Navigate } from "react-router-dom"
 import React,{ lazy } from "react"
+import Login from "../views/Login"
 
 // const About = lazy(() => import("../views/About"))
 const Home = lazy(() => import("../views/Home"))
@@ -37,6 +38,10 @@ const routes = [
                 element: withLoadingComponent(<Page301 />) 
             }
         ]
+    },
+    {
+        path: "/login",
+        element: <Login />
     },
     {
         path: '*',
