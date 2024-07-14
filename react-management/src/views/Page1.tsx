@@ -7,6 +7,10 @@ const View = () => {
         num: state.num
     }))
 
+    const {sarr} = useSelector((state:RootState) => ({
+        sarr: state.sarr
+    }))
+
     const dispatch = useDispatch();
 
     const changeNum = () => {
@@ -18,6 +22,7 @@ const View = () => {
             <p>这是Page1页面</p>
             <p>{num}</p>
             <button onClick={changeNum}>点击按钮</button>
+            <p>{sarr}</p>
         </div>
     )
 }
