@@ -1,15 +1,12 @@
 import { useSelector,useDispatch } from "react-redux"
+import numStatus from "../store/NumStatus/index"
 
 
 const View = () => {
     // 获取仓库数据
     const dispatch = useDispatch();
     const changeNum = () => {
-        dispatch((dis:Function) => {
-            setTimeout(() => {
-                dis({type: 'add1'})
-            }, 1000)
-        })
+        dispatch(numStatus.asyncActions.asyncAdd1)
     }
     const changeNum2 = () => {
         dispatch({type: 'add2', val: 200})

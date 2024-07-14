@@ -10,15 +10,20 @@ const store = {
             newState.num+=action.val
         }
     },
+    asyncActions: {
+       asyncAdd1: (dispatch:Function) => {
+            setTimeout(() => {
+                dispatch({type: 'add1'})
+            }, 1000)
+        }
+    },
     actionNames: {}
 }
 
 const actionNames = {}
-
 for (let key in store.actions){
     actionNames[key] = key
 }
-
 store.actionNames = actionNames
 
 export default store
