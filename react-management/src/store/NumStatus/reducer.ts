@@ -1,10 +1,7 @@
-import handleNum from "./NumStatus"
-import handleArr from "./ArrStatus"
+import handleNum from "./index.ts"
 
 const defaultState = {
-    //num:handleNum.state.num //这种数据一多要写很多次
-    ...handleNum.state,  // 解构的写法
-    ...handleArr.state
+    ...handleNum.state,
 }
 
 let reducer = (state = defaultState, action: {type: string, val: number}) => {
