@@ -5,7 +5,11 @@ const View = () => {
     // 获取仓库数据
     const dispatch = useDispatch();
     const changeNum = () => {
-        dispatch({type: 'add1'})
+        dispatch((dis:Function) => {
+            setTimeout(() => {
+                dis({type: 'add1'})
+            }, 1000)
+        })
     }
     const changeNum2 = () => {
         dispatch({type: 'add2', val: 200})

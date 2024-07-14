@@ -4,9 +4,7 @@ const store = {
     },
     actions: {
         add1(newState:{num:number}){
-            setTimeout(() => {
-                newState.num++
-            }, 1000)
+            newState.num++
         },
         add2(newState:{num:number}, action:{type: string, val: number}){
             newState.num+=action.val
