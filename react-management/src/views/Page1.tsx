@@ -3,19 +3,17 @@ import { useSelector,useDispatch } from "react-redux"
 
 const View = () => {
     // 获取仓库数据
-    const {num} = useSelector((state:RootState) => ({
-        num: state.num
-    }))
-
-    const {sarr} = useSelector((state:RootState) => ({
-        sarr: state.sarr
-    }))
-
     const dispatch = useDispatch();
 
     const changeNum = () => {
         dispatch({type: 'add1'})
     }
+
+    const {num,sarr} = useSelector((state:RootState) => ({
+        num:state.handleNum.num,
+        sarr:state.handleArr.sarr
+    
+    }))
 
     return (
         <div className='home'>
