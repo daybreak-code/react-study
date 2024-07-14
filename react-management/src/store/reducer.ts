@@ -7,8 +7,8 @@ const defaultState = {
 let reducer = (state = defaultState, action: {type: string, val: number}) => {
     let newState = JSON.parse(JSON.stringify(state))
     switch (action.type){
-        case 'add1':
-            handleNum.actions.add1(newState, action)
+        case handleNum.add1:
+            handleNum.actions.add1(newState)
             break;
         case 'add2':
             handleNum.actions.add2(newState, action)
