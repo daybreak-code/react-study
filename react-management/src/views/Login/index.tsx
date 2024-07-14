@@ -3,6 +3,7 @@ import styles from "./login.module.css"
 import initLoginBtn from './init.ts'
 import { Input, Space, Button } from 'antd';
 import './login.less'
+import {captchaAPI} from "../../request/api.ts"
 
 const View = () => {
 
@@ -37,6 +38,13 @@ const View = () => {
        console.log("username is: password is: captcha is: ", userName, passwordVal, captchaVal)
     }
 
+    const getCaptchaImage = () => {
+        captchaAPI().then((res) => {
+            console.log(res)
+        })
+
+    }
+
 
     return (
         <div className={styles.loginPage}>
@@ -56,7 +64,7 @@ const View = () => {
                         <Input.Password placeholder="input password" onChange={changePassword}/>
                         <div className="captchaBox">
                             <Input placeholder="Verify code" onChange={changeCaptcha} />
-                            <div className="captchaImg">
+                            <div className="captchaImg" onClick={getCaptchaImage}>
                                 <img height="38" src="./verify_code.png" alt="./verify_code.png" />
                             </div>
                         </div>
