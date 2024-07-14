@@ -3,7 +3,7 @@ import styles from "./login.module.css"
 import initLoginBtn from './init.ts'
 import { Input, Space, Button } from 'antd';
 import './login.less'
-import {captchaAPI} from "../../request/api.ts"
+import {CaptchaAPI} from "../../request/api.ts"
 
 const View = () => {
 
@@ -38,13 +38,11 @@ const View = () => {
        console.log("username is: password is: captcha is: ", userName, passwordVal, captchaVal)
     }
 
-    const getCaptchaImage = () => {
-        captchaAPI().then((res) => {
-            console.log(res)
-        })
+    const getCaptchaImage = async () => {
+        let captchaAPIRes = await CaptchaAPI();
+        console.log(captchaAPIRes);
 
     }
-
 
     return (
         <div className={styles.loginPage}>
