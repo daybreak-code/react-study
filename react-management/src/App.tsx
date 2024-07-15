@@ -38,9 +38,9 @@ function App() {
       return <ToPage1 />
     }
     //2. 如果访问的不是登录页面，并且没有token，跳转到登录页
-    if (location.pathname !== "/login" && !token){
-      return <ToLogin />
-    }
+    // if (location.pathname !== "/login" && !token){
+    //   return <ToLogin />
+    // }
     return outlet
   }
 
