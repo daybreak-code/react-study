@@ -11,3 +11,11 @@
 npm run dev
 
 ```
+
+## technical stack
+
+|technical stack|version|
+|--|--|
+| "antd" | "^5.19.1"|
+|"axios" | "^1.7.2"|
+|"react" | "^18.3.1"|
