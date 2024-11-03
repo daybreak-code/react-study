@@ -1,8 +1,14 @@
 # Compiled class file
 *.class
 
-# Log file
+# Logs
+logs
 *.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
 # BlueJ files
 *.ctxt
@@ -23,9 +29,11 @@
 hs_err_pid*
 replay_pid*
 
+# sub node modules
 react-basic/node_modules
 react-bill/node_modules
 react-blog/node_modules
 react-typescript/node_modules
 react-live/node_modules
 react-management/node_modules
+react-higher/node_modules
